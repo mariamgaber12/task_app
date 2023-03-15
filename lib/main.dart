@@ -8,7 +8,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: Scaffold(body: HomePage()));
+    return const MaterialApp(
+        home: Scaffold(backgroundColor: Colors.white, body: HomePage()));
   }
 }
 
@@ -22,7 +23,6 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State {
   // Default Background Color.
   Color colorCode = Colors.white;
-
   final Random random = Random();
 
   generateRandomColor() {
