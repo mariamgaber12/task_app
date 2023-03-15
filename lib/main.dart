@@ -8,8 +8,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        home: Scaffold(backgroundColor: Colors.white, body: HomePage()));
+    return const MaterialApp(home: Scaffold(body: HomePage()));
   }
 }
 
@@ -22,7 +21,7 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State {
   // Default Background Color.
-  Color colorCode = Colors.white;
+  Color colorCode = Colors.black12;
   final Random random = Random();
 
   generateRandomColor() {
@@ -42,20 +41,25 @@ class HomePageState extends State {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: colorCode,
-        appBar: AppBar(title: const Text('Test APP')),
+        appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            centerTitle: true,
+            title: const Text('Test APP')),
         body: GestureDetector(
           onTap: () => generateRandomColor(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  Text('Hello there'),
-                ],
-              ),
+              Container(
+                  height: 770,
+                  width: 411,
+                  child: TextButton(
+                      onPressed: () => generateRandomColor(),
+                      child: Text(
+                        'Hello there',
+                        style: TextStyle(color: Colors.white),
+                      ))),
             ],
           ),
         ));
