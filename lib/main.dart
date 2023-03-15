@@ -1,76 +1,63 @@
+import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyHomePage(),
-    );
+    return const MaterialApp(home: Scaffold(body: HomePage()));
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class HomePageState extends State {
+  // Default Background Color.
+  Color colorCode = Colors.white;
+
+  final Random random = Random();
+
+  generateRandomColor() {
+    Color tmpColor = Color.fromARGB(
+      random.nextInt(256),
+      random.nextInt(256),
+      random.nextInt(256),
+      random.nextInt(256),
+    );
+
+    setState(() {
+      colorCode = tmpColor;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    //Color color = const Color(0xFFFFFFFF);
-    final Random random = Random();
-
     return Scaffold(
-      backgroundColor: Color.fromARGB(
-        //or with fromRGBO with fourth arg as _random.nextDouble(),
-        random.nextInt(256),
-        random.nextInt(256),
-        random.nextInt(256),
-        random.nextInt(256),
-      ),
-      //Colors.primaries[Random().nextInt(Colors.primaries.length)],
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-        title: const Text('Test APP'),
-      ),
-      body: GestureDetector(
-        onTap: () {
-          /*
-          setState(() {
-            color = Color.fromARGB(
-              //or with fromRGBO with fourth arg as _random.nextDouble(),
-              random.nextInt(256),
-              random.nextInt(256),
-              random.nextInt(256),
-              random.nextInt(256),
-            );
-          });
-          */
-        },
-        child: Center(
+        backgroundColor: colorCode,
+        appBar: AppBar(title: const Text('Test APP')),
+        body: GestureDetector(
+          onTap: () => generateRandomColor(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Hello there',
-                style: Theme.of(context).textTheme.headlineMedium,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Text('Hello there'),
+                ],
               ),
             ],
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
